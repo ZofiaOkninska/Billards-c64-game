@@ -17,15 +17,6 @@ body{
   height: 400px;
 }
 
-#controls{
-  display: flex;
-  align-items: flex-start;
-  position: relative;
-  margin-top: 5%;
-  width: 800px;
-  height: 50px;
-}
-
 #canvasPool, #canvasBalls{
   display: flex;
   justify-content: center;
@@ -39,6 +30,24 @@ body{
 
 #canvasBalls{
   z-index: 2;
+}
+
+#controls{
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  margin-top: 5%;
+  width: 800px;
+  height: 50px;
+}
+
+#shotStrenghtDiv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  height: 50px;
+  margin-left: 30%;
 }
 
 /* controls */
@@ -59,4 +68,21 @@ body{
 
 #score{
   color : beige;
+}
+
+/* shotStrenghtDiv */
+
+#ball{
+  background-image: url("../Assets/ball.png");
+  background-size: 30px 30px;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+}
+
+#cue{
+  background-color: white;
+  height: 5px;
+  width:  200px;
+  margin: 0;
 }

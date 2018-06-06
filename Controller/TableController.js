@@ -1,4 +1,4 @@
-class Table {
+class TableController {
   constructor(contextPool, contextBalls, initContoller) {
     this.contextPool = contextPool;
     this.contextBalls = contextBalls;
@@ -16,8 +16,11 @@ class Table {
     this.score = 0;
 
     this._fillContextPool(this.contextPool);
+    this.roundController = this._createNewRound();
 
-    this.round = this._createNewRound();
+    this.keyHandler = new KeyHandlerController();
+    console.log("table: ", this.keyHandler);
+    //this.keyHandler.registerAction("keydown", 32, () => this._setEventOnSpaceDown());
 
     this.render();
   }
@@ -57,6 +60,7 @@ class Table {
       this.edges[5].lineTo(60, 70);
       path.addPath(this.edges[5]);
     };
+
     let setPocketsCollisionEdges = () => {
       this.pockets[0].moveTo(60, 70);
       this.pockets[0].lineTo(60, 50);
@@ -114,27 +118,35 @@ class Table {
   }
 
   _createNewRound() {
-    var round = new Round();
+    var round = new RoundController();
     this.balls = round.createBalls(this.contextBalls);
     this.whiteBall = round.createWhiteBall(this.contextBalls);
     this.pointer = round.createPointer(this.contextBalls);
+    this.roundCount++;
     return round;
+  }
+
+  _setEventOnSpaceDown() {
+    console.log("set");
+
+    //var shot = new Shot();
+
   }
 
   render() {
     setInterval(() => {
-      this.initContoller.updateControls(this.roundCount, this.shots, this.score);
-      //this.contextBalls.clearRect(0, 0, this.contextBalls.canvas.width, this.contextBalls.canvas.height);
+      this.contextBalls.clearRect(0, 0, this.contextBalls.canvas.width, this.contextBalls.canvas.height);
 
       //checkCollisionWithEdges();
       //checkCollisionWithPockets();
 
-      if (this.round) {
-        // round.updateBalls();
-        // round.updateWhiteBall();
-        // round.updatePointer();
+      if (this.roundController) {
+        this.roundController.drawBalls(this.contextBalls, this.balls);
+        this.roundController.drawBall(this.contextBalls, this.whiteBall);
+        this.roundController.drawPointer(this.contextBalls, this.pointer);
       }
 
+      this.initContoller.updateControls(this.roundCount, this.shots, this.score);
       //console.log("does");
     }, 1000 / 60);
   }

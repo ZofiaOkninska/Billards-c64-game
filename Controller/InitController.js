@@ -7,9 +7,11 @@ class InitContoller {
     this.contextBalls = this.canvasBalls.getContext("2d");
 
     this.controls = this._createControls();
+    this.shotStrenghtDiv = this._createShotStrenghtDiv();
 
-    this.table = new Table(this.contextPool, this.contextBalls, this);
-    this._initializeEventListeners(this.canvasBalls);
+    this.tableController = new TableController(this.contextPool, this.contextBalls, this);
+
+    //this._initializeEventListeners(this.canvasBalls);
   }
 
   _createCanvas(type) {
@@ -26,38 +28,44 @@ class InitContoller {
     var ctrlObjects = {};
 
     //round
-    var round = createDivWithID("round", controls);
+    var round = this._createDivWithID("round", controls);
     round.innerText = "ROUND - ";
 
     //shots
-    var shots = createDivWithID("shots", controls);
+    var shots = this._createDivWithID("shots", controls);
     shots.innerText = "SHOTS - ";
 
     //score
-    var score = createDivWithID("score", controls);
+    var score = this._createDivWithID("score", controls);
     score.innerText = "SCORE - ";
 
     ctrlObjects.round = round;
     ctrlObjects.shots = shots;
     ctrlObjects.score = score;
 
-    function createDivWithID(id, destination) {
-      var div = document.createElement("div");
-      div.id = id;
-      destination.appendChild(div);
-      return div;
-    }
-
     return ctrlObjects;
   }
 
-  _initializeEventListeners(canvasBalls) {
-    /*
-      this.canvasBalls.addEventListener( 'mousedown', mouse_down, false );
-      this.canvasBalls.addEventListener( 'mouseup', mouse_up, false );
-      this.canvasBalls.addEventListener( 'mousemove', mouse_move, false );
-    */
+  _createShotStrenghtDiv() {
+    var shotStrenghtDiv = document.getElementById("shotStrenghtDiv");
+
+    //ball
+    var ball = this._createDivWithID("ball", shotStrenghtDiv);
+
+    //cue
+    var cue = this._createDivWithID("cue", shotStrenghtDiv);
   }
+
+  _createDivWithID(id, destination) {
+    var div = document.createElement("div");
+    div.id = id;
+    destination.appendChild(div);
+    return div;
+  }
+
+  // _initializeEventListeners(canvasBalls) {
+  //
+  // }
 
   updateControls(round, shots, score) {
     document.getElementById("round").innerText = "ROUND - " + round;

@@ -1,16 +1,12 @@
 class KeyHandlerController {
   constructor() {
-    //KeyHandlerController.instance = false;
     if (!KeyHandlerController.instance) {
-      this.instance = null;
       this.keyHandlerMap = {};
       this.registeredActions = [];
       this._initialize();
       KeyHandlerController.instance = this;
-      //console.log("el", KeyHandlerController.instance);
     } else {
-      //console.log("ret");
-      return this.instance;
+      return KeyHandlerController.instance;
     }
   }
 

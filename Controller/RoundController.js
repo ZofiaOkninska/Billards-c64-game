@@ -64,6 +64,8 @@ class RoundController {
   drawPointer(ctx, pointer) {
     let pointerImg = new Image();
     pointerImg.src = 'View/Assets/pointer.png';
+    //pointerImg.onload = () => {
     ctx.drawImage(pointerImg, pointer.x, pointer.y, this.ballRaius * 2, this.ballRaius * 2);
+    //};
   }
 }

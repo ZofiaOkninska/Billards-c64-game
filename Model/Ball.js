@@ -5,6 +5,9 @@ class Ball {
     this.radius = radius;
     this.color = color;
 
+    this.beatedPositionX = 0;
+    this.beatedPositionY = 0;
+
     this.velocity = 0;
   }
 }
